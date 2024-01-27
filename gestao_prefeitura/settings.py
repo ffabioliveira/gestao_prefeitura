@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.prefeituras',
     'apps.beneficiarios',
+    'apps.pipeiros',
 ]
 
 MIDDLEWARE = [
