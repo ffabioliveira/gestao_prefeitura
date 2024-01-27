@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.prefeituras',
     'apps.beneficiarios',
     'apps.pipeiros',
+    'apps.entregas'
 ]
 
 MIDDLEWARE = [
