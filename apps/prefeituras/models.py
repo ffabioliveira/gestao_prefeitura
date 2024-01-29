@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 # Define uma constante para o tamanho máximo dos campos de texto
 MAX_LENGTH = 100
@@ -11,6 +12,7 @@ telefone_validator = RegexValidator(
 )
 
 class Prefeitura(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.PROTECT)
     # Usa a constante para definir o tamanho máximo dos campos
     prefeitura = models.CharField(max_length=MAX_LENGTH)
     responsavel = models.CharField(max_length=MAX_LENGTH)

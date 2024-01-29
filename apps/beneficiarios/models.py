@@ -24,11 +24,8 @@ telefone_validator = RegexValidator(
 )
 
 class Beneficiario(models.Model):
-    # Usa a constante para definir o tamanho máximo do campo nome
     nome = models.CharField(max_length=MAX_LENGTH)
-    # Usa o validador para verificar o formato do CPF
     cpf = models.CharField(max_length=11, unique=True, validators=[cpf_validator])
-    # Repete os campos e os validadores do endereço na classe Beneficiario
     logradouro = models.CharField(max_length=MAX_LENGTH)
     numero = models.CharField(max_length=20)
     complemento = models.CharField(max_length=MAX_LENGTH, blank=True, null=True)
@@ -36,24 +33,16 @@ class Beneficiario(models.Model):
     cidade = models.CharField(max_length=100)
     estado = models.CharField(max_length=2)
     cep = models.CharField(max_length=8, validators=[cep_validator])
-    # Usa o validador para verificar o formato do telefone
     telefone_contato = models.CharField(max_length=15, validators=[telefone_validator])
     prefeitura_associado = models.ForeignKey(Prefeitura, on_delete=models.CASCADE)
 
     def __str__(self):
-        # Cria um método para formatar o endereço na classe Beneficiario
-        # Usa uma lista para armazenar as partes do endereço
         endereco = []
-        # Adiciona o logradouro e o número
         endereco.append(f"{self.logradouro}, {self.numero}")
-        # Se houver complemento, adiciona também
         if self.complemento:
             endereco.append(self.complemento)
-        # Adiciona o bairro, a cidade, o estado e o cep
         endereco.append(self.bairro)
         endereco.append(f"{self.cidade} - {self.estado}")
         endereco.append(self.cep)
-        # Retorna o endereço separado por vírgulas
         endereco = ", ".join(endereco)
-        # Retorna o nome e o endereço do beneficiário
         return f"{self.nome} - {endereco}"
